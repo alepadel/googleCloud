@@ -72,7 +72,7 @@ def train_and_evaluate(batch_size, epochs, job_dir, output_path):
     
     # Save model in TF SavedModel format
     model_dir = os.path.join(output_path,VERSION)
-    models.save_model(model, model_dir, save_format = 'tf')
+    models.save_model(m, model_dir, save_format = 'tf')
 
 
 def main():
