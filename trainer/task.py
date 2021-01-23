@@ -1,5 +1,7 @@
 import argparse
 import logging.config
+import os
+import time
 
 from tensorflow.keras import datasets
 from tensorflow.keras import models
@@ -10,6 +12,7 @@ from tensorflow.keras import losses
 from tensorflow.keras import metrics
 from tensorflow.keras import utils
 from tensorflow.keras.utils import to_categorical
+from tensorflow.keras import callbacks
 
 LOGGER = logging.getLogger()
 
@@ -57,8 +60,9 @@ def train_and_evaluate(batch_size, epochs, job_dir, output_path):
     m.compile(loss = losses.categorical_crossentropy, optimizer=optimizers.Adam(),metrics=[metrics.categorical_accuracy])
 
     # Train the model
-
-    m.fit(x_train,y_train, epochs=epochs, batch_size = batch_size)
+    logdir = os.path.join(job_dir, "logs/scalars/" + time.strftime("%Y%m%d-%H%M%S"))
+    tb_callback = callbacks.TensorBoard(log_dir=logdir)
+    m.fit(x_train,y_train, epochs=epochs, batch_size = batch_size,callbacks=[tb_callback])
 
     # Evaluate the model
     loss_value, accuracy = m.evaluate(x_test,y_test)
