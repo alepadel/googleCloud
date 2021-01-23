@@ -54,8 +54,7 @@ def train_and_evaluate(batch_size, epochs, job_dir, output_path):
     # Build the model
 
     m = _build_model()
-    m.compile(loss=losses.categorical_crossentropy, optimzer=optimizers.Adam(),
-    metrics = [metrics.categorical_accuracy])
+    m.compile(loss = losses.categorical_crossentropy, optimizer=optimizers.Adam(),metrics=[metrics.categorical_accuracy])
 
     # Train the model
 
