@@ -23,6 +23,7 @@ def _download_data():
 def _preprocess_data(x,y):
     x = x / 255.0 
     y = utils.to_categorical(y)
+    return x,y
 
 def _build_model():
     m = models.Sequential()
