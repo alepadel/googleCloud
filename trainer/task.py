@@ -10,8 +10,10 @@ from tensorflow.keras import losses
 from tensorflow.keras import metrics
 from tensorflow.keras.utils import to_categorical
 
+LOGGER = logging.getLogger()
 
 def _download_data():
+    LOGGER.info("Downloading data...")
     train, test = datasets.mnist.load_data()
     x_train, y_train = train
     x_test, y_test = test
@@ -50,11 +52,16 @@ def train_and_evaluate(batch_size, epochs, job_dir, output_path):
     # Build the model
 
     m = _build_model()
+    m.compile(loss=losses.categorical_crossentropy, optimzer=optimizers.Adam(),
+    metrics = [metrics.categorical_accuracy])
 
     # Train the model
 
-    # Evaluate the model
+    m.fit(x_train,y_train, epochs=epochs, batch_size = batch_size)
 
+    # Evaluate the model
+    loss_value, accuracy = m.evaluate(x_test,y_test)
+    LOGGER.info(" *** LOSS VALUE: %f  ACCURACY %.4f" % (loss_value,accuracy))
     pass
 
 
