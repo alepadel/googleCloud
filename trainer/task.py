@@ -8,6 +8,7 @@ from tensorflow.keras import activations
 from tensorflow.keras import optimizers
 from tensorflow.keras import losses
 from tensorflow.keras import metrics
+from tensorflow.keras import utils
 from tensorflow.keras.utils import to_categorical
 
 LOGGER = logging.getLogger()
