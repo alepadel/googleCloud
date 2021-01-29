@@ -80,7 +80,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--batch-size', type=int, help='Batch size for the training')
     parser.add_argument('--epochs', type=int, help='Number of epochs for the training')
-    parser.add_argument('--job-dir', default=None, required=False, help='Option for AI Platform')
+    parser.add_argument('--job-dir', default=None, required=False, help='Option for AI Platform') # opcion obligatoria
     parser.add_argument('--model-output-path', help='Path to write the SaveModel format')
 
     args = parser.parse_args()
