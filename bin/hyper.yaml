@@ -17,3 +17,8 @@ trainingInput:
       - 1024
       - 2048
       - 4096
+    - parameterName: type-model
+      type: CATEGORICAL
+      categoricalValues:
+      - 'NeuralNetworks'
+      - 'ConvolutionalNN'
