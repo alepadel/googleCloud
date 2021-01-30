@@ -47,7 +47,7 @@ def _build_model():
 
     return m
 
-def train_and_evaluate(batch_size, epochs, job_dir, output_path):
+def train_and_evaluate(batch_size, epochs, job_dir, output_path, is_hypertune):
 
     # Download the data
     x_train, y_train, x_test, y_test = _download_data()
@@ -71,13 +71,15 @@ def train_and_evaluate(batch_size, epochs, job_dir, output_path):
     LOGGER.info(" *** LOSS VALUE: %f  ACCURACY %.4f" % (loss_value,accuracy))
     
     # Save model in TF SavedModel format
-    model_dir = os.path.join(output_path,VERSION)
-    models.save_model(m, model_dir, save_format = 'tf')
+    if not is_hypertune:
+        model_dir = os.path.join(output_path,VERSION)
+        models.save_model(m, model_dir, save_format = 'tf')
 
 
 def main():
     """Entry point for your module."""
     parser = argparse.ArgumentParser()
+    parser.add_argument('--hypertune', action='store_true', help = 'This is a hypertuning job')
     parser.add_argument('--batch-size', type=int, help='Batch size for the training')
     parser.add_argument('--epochs', type=int, help='Number of epochs for the training')
     parser.add_argument('--job-dir', default=None, required=False, help='Option for AI Platform') # opcion obligatoria
@@ -85,12 +87,13 @@ def main():
 
     args = parser.parse_args()
 
+    is_hypertune = args.hypertune
     batch_size = args.batch_size
     epochs = args.epochs
     job_dir = args.job_dir
     output_path = args.model_output_path
 
-    train_and_evaluate(batch_size, epochs, job_dir, output_path)
+    train_and_evaluate(batch_size, epochs, job_dir, output_path, is_hypertune)
 
 if __name__ == "__main__":
     main()
