@@ -3,7 +3,7 @@
 gcloud ai-platform jobs submit training mnist_`date +"%s"` \
 --python-version 3.7 \
 --runtime-version 2.3 \
---scale-tier BASIC \
+--scale-tier BASIC_GPU \
 --package-path ./trainer \
 --module-name trainer.task \
 --region europe-west1 \
