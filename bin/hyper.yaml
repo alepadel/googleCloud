@@ -15,6 +15,5 @@ trainingInput:
       type: DISCRETE
       discreteValues:
       - 1024
-      - 1024
       - 2048
       - 4096
