@@ -1,0 +1,20 @@
+trainingInput:
+  hyperparameters:
+    goal: MAXIMIZE
+    hyperparameterMetricTag: accuracy_metrics
+    maxTrials: 15
+    maxParallelTrials: 5
+    enableTrialEarlyStopping: True
+    params:
+    - parameterName: epochs #nombre del parametro
+      type: INTEGER 
+      minValue: 15
+      maxValue: 75
+      scaleType: UNIT_LINEAR_SCALE
+    - parameterName: batch-size
+      type: DISCRETE
+      discreteValues:
+      - 1024
+      - 1024
+      - 2048
+      - 4096
